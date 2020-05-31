@@ -1,0 +1,17 @@
+{
+  "name": "homecontrol-js",
+  "version": "1.0.0",
+  "description": "A TypeScript library to communicate with HomeControl",
+  "module": "dist/index.js",
+  "types": "types/",
+  "scripts": {
+    "dev": "scripts/develop",
+    "build": "scripts/build"
+  },
+  "author": "Lennart K",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {}
+}

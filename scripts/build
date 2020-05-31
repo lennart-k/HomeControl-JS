@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+cd "$(dirname $(readlink -f "$0"))/.."
+
+echo "Building HomeControl JS"
+
+./node_modules/typescript/bin/tsc

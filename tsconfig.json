@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "ES2020",
+        "strict": true,
+        "declaration": true,
+        "declarationDir": "types",
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "lib": ["es2016", "dom", "ESNext.AsyncIterable", "ES2017.Object"],
+        "baseUrl": ".",
+        "paths": {
+            "/*": ["lib/*"]
+        },
+    },
+    "include": [
+        "lib/**/*.ts"
+    ],
+    "exclude": ["node_modules"],
+}

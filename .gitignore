@@ -1,0 +1,12 @@
+# Node
+node_modules
+
+# Build folders
+dist
+types
+
+#VSCode
+.vscode
+
+# Test files
+index.html
