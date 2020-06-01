@@ -1,5 +1,5 @@
-import { EventBus } from './event'
-import { HomeControl } from './homeControl'
+import { EventBus } from './event.js'
+import { HomeControl } from './homeControl.js'
 
 enum ItemStatus {
     Online = "online",

@@ -3,4 +3,4 @@
 set -e
 cd "$(dirname $(readlink -f "$0"))/.."
 
-./node_modules/rollup/dist/bin/rollup -w -c ./rollup.config.js
+./node_modules/@babel/cli/bin/babel.js --watch lib --out-dir dist --extensions '.ts'

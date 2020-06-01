@@ -1,9 +1,9 @@
-import { AccessToken } from './auth/index'
-import { User } from './auth/user'
-import { Item } from './item'
-import { Module } from './module'
-import { EventBus } from './event'
-import { uuidv4 } from './util'
+import { AccessToken } from './auth/index.js'
+import { User } from './auth/user.js'
+import { Item } from './item.js'
+import { Module } from './module.js'
+import { EventBus } from './event.js'
+import { uuidv4 } from './util.js'
 
 interface WSCommand {
     type: string
