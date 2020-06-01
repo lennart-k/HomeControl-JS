@@ -1,4 +1,4 @@
-import { LoginStepError } from './errors.js'
+import { LoginStepError } from './errors'
 
 export interface LoginFlowResponse {
     id: string

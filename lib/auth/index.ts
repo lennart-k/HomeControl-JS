@@ -1,4 +1,4 @@
-import { LoginFlow, LoginFlowResponse } from './loginFlow.js'
+import { LoginFlow, LoginFlowResponse } from './loginFlow'
 
 export interface AccessTokenStorage {
     saveToken(token: AccessToken): Promise<void>
