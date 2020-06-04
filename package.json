@@ -9,8 +9,12 @@
     "dev": "scripts/develop",
     "build": "scripts/build",
     "version": "npm run build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "rm -rf dist && npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "author": "Lennart K",
   "license": "MIT",
   "devDependencies": {
