@@ -6,7 +6,9 @@
   "types": "types",
   "scripts": {
     "dev": "scripts/develop",
-    "build": "scripts/build"
+    "build": "scripts/build",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "author": "Lennart K",
   "license": "MIT",
