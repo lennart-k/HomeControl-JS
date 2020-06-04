@@ -5,4 +5,4 @@ cd "$(dirname $(readlink -f "$0"))/.."
 
 echo "Building HomeControl JS"
 
-./node_modules/@babel/cli/bin/babel.js lib --out-dir dist --extensions '.ts'
+./node_modules/typescript/bin/tsc

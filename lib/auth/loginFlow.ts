@@ -14,12 +14,14 @@ export interface LoginFlowResponse {
 export class FlowStep {
     data: object
     stepType: string
+    formType: string
     stepId?: string
     authCode?: string
 
-    constructor(data: object, stepType: string, stepId: string, authCode?: string) {
+    constructor(data: object, stepType: string, formType: string, stepId: string, authCode?: string) {
         this.data = data
         this.stepType = stepType
+        this.formType = formType
         this.stepId = stepId
         this.authCode = authCode
     }
@@ -27,6 +29,7 @@ export class FlowStep {
     static fromResponse(response: LoginFlowResponse) {
         return new FlowStep(
             response.data,
+            response.type,
             response.form_type,
             response.step_id,
             response.auth_code)
@@ -56,10 +59,10 @@ export class LoginFlow {
         this.currentStep = FlowStep.fromResponse(responseData)
     }
     get stepId() {
-        return this.currentStep?.stepId
+        return this.currentStep && this.currentStep.stepId
     }
     get authCode() {
-        return this.currentStep?.authCode
+        return this.currentStep && this.currentStep.authCode
     }
     static fromResponse(apiEndpoint: string, response: LoginFlowResponse) {
         return new LoginFlow(apiEndpoint, response.id, FlowStep.fromResponse(response))

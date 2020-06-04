@@ -3,4 +3,5 @@
 set -e
 cd "$(dirname $(readlink -f "$0"))/.."
 
-./node_modules/@babel/cli/bin/babel.js --watch lib --out-dir dist --extensions '.ts'
+TSC=./node_modules/typescript/bin/tsc
+$TSC -w

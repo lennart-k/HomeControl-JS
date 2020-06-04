@@ -13,7 +13,7 @@ interface WSCommand {
 
 export class HomeControl extends EventBus {
     connection!: WebSocket
-    accessToken: AccessToken
+    accessToken!: AccessToken
     apiUrl: string
     user!: User
     socket!: WebSocket
@@ -21,10 +21,9 @@ export class HomeControl extends EventBus {
     modules: Map<string, Module>
     ready: boolean = false
 
-    constructor(apiUrl: string, accessToken: AccessToken) {
+    constructor(apiUrl: string) {
         super()
         this.apiUrl = apiUrl
-        this.accessToken = accessToken
         this.items = new Map
         this.modules = new Map
     }
@@ -33,7 +32,8 @@ export class HomeControl extends EventBus {
         return `${this.apiUrl.replace(/^http/, 'ws')}/websocket`
     }
 
-    async connect() {
+    async connect(accessToken: AccessToken) {
+        this.accessToken = accessToken
         let readyPromise = this.waitForEvent('ready')
         this.socket = new WebSocket(this.wsUrl)
         this.socket.addEventListener('open', this.onWSOpen.bind(this))
@@ -131,5 +131,11 @@ export class HomeControl extends EventBus {
             let mod = new Module(moduleInfo, this)
             this.modules.set(mod.name, mod)
         }
+    }
+    async restartCore() {
+        await this.sendMessage({type: 'restart_core'})
+    }
+    async shutdownCore() {
+        await this.sendMessage({type: 'shutdown_core'})
     }
 }
