@@ -10,7 +10,7 @@
     "build": "scripts/build",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "prepublishOnly": "rm -rf dist && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist"
