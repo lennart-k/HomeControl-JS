@@ -1,4 +1,4 @@
-![](https://img.shields.io/npm/v/homecontrol-js)
+[![](https://img.shields.io/npm/v/homecontrol-js)](https://www.npmjs.com/package/homecontrol-js)
 
 
 # HomeControl JS
