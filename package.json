@@ -13,7 +13,10 @@
     "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "lib",
+    "types",
+    "tsconfig.json"
   ],
   "author": "Lennart K",
   "license": "MIT",
