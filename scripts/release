@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+cd "$(dirname $(readlink -f "$0"))/.."
+
+echo $1
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: ./release <version bump>"
+    exit 1
+fi
+
+npm version $1 -m ":bookmark: Bumping version to %s"
