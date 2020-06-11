@@ -4,6 +4,7 @@ import { Item } from './item.js'
 import { Module } from './module.js'
 import { EventBus } from './event.js'
 import { uuidv4 } from './util.js'
+import Panel from './panel.js'
 
 interface WSCommand {
     type: string
@@ -19,6 +20,7 @@ export class HomeControl extends EventBus {
     socket!: WebSocket
     items: Map<string, Item>
     modules: Map<string, Module>
+    panels: Array<Panel>
     ready: boolean = false
 
     constructor(apiUrl: string) {
@@ -26,6 +28,7 @@ export class HomeControl extends EventBus {
         this.apiUrl = apiUrl
         this.items = new Map
         this.modules = new Map
+        this.panels = new Array
     }
 
     get wsUrl(): string {
@@ -45,8 +48,11 @@ export class HomeControl extends EventBus {
         console.log(`WebSocket connection opened`)
         await this.authenticate()
 
-        await this.fetchItems()
-        await this.fetchModules()
+        await Promise.all([
+            this.fetchItems(),
+            this.fetchModules(),
+            this.fetchPanels()
+        ])
 
         this.sendMessage({ type: 'watch_states' })
         this.addEventListener('event', async (event: any) => {
@@ -130,6 +136,12 @@ export class HomeControl extends EventBus {
         for (let moduleInfo of response.data) {
             let mod = new Module(moduleInfo, this)
             this.modules.set(mod.name, mod)
+        }
+    }
+    async fetchPanels() {
+        let response = await this.sendMessage({ type: 'get_panels' })
+        for (let panelInfo of response.data) {
+            this.panels.push(new Panel(panelInfo))
         }
     }
     async restartCore() {
