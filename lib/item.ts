@@ -41,12 +41,12 @@ export class Item extends EventBus {
             this.states.set(state, value)
         }
     }
-    async executeAction(action: string, data: any) {
+    async executeAction(action: string, data?: {[key: string]: any}) {
         let result = await this.core.sendMessage({
             type: 'action',
             action: action,
             item: this.uniqueIdentifier,
-            kwargs: data
+            kwargs: data || {}
         })
         return result
     }
