@@ -145,9 +145,9 @@ export class HomeControl extends EventBus {
         }
     }
     async restartCore() {
-        await this.sendMessage({type: 'restart_core'})
+        await this.sendMessage({type: 'core_restart'})
     }
     async shutdownCore() {
-        await this.sendMessage({type: 'shutdown_core'})
+        await this.sendMessage({type: 'core_shutdown'})
     }
 }
