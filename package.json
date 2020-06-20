@@ -1,7 +1,7 @@
 {
   "name": "homecontrol-js",
   "type": "module",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A TypeScript library to communicate with HomeControl",
   "module": "dist/index.js",
   "types": "types",
