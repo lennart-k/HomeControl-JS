@@ -23,6 +23,8 @@ export class Item extends EventBus {
     identifier: string
     uniqueIdentifier: string
     name?: string
+    module: string
+    type: string
     states: Map<string, any>
     status: ItemStatus
     actions: Array<string>
@@ -33,9 +35,11 @@ export class Item extends EventBus {
         this.identifier = itemInfo.identifier
         this.uniqueIdentifier = itemInfo.unique_identifier
         this.name = itemInfo.name
+        this.status = itemInfo.status
+        this.module = itemInfo.module
+        this.type = itemInfo.type
         this.actions = itemInfo.actions
         this.states = new Map
-        this.status = itemInfo.status
         this.core = core
         for (let [state, value] of Object.entries(itemInfo.states)) {
             this.states.set(state, value)
