@@ -3,13 +3,13 @@ import { HomeControl } from './homeControl.js'
 export interface ModuleInfo {
     name: string
     path: string
-    spec: Object
+    spec: {[key: string]: any}
 }
 
 export class Module {
     name: string
     path: string
-    spec: Object
+    spec: {[key: string]: any}
     core: HomeControl
 
     constructor(moduleInfo: ModuleInfo, core: HomeControl) {
@@ -19,4 +19,3 @@ export class Module {
         this.core = core
     }
 }
-
