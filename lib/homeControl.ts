@@ -6,7 +6,7 @@ import { EventBus } from './event.js'
 import { uuidv4 } from './util.js'
 import Panel from './panel.js'
 
-interface WSCommand {
+export interface WSCommand {
     type: string
     id?: string
     [key: string]: any
