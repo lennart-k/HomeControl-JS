@@ -113,7 +113,9 @@ export class AuthContext {
     async getAccessToken(): Promise<AccessToken | null> {
         let existingToken = await this.tokenStorage.loadToken()
         if (!existingToken) return null
-        if (existingToken.expiration < new Date) return null
+        if (existingToken.expiration < new Date) {
+            existingToken = await this.refreshAccessToken(existingToken)
+        }
         if (!await this.validateAccessToken(existingToken)) return null
         return existingToken
     }
