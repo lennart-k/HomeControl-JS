@@ -159,9 +159,9 @@ export class HomeControl extends EventBus {
         return (response.data as Array<UserInfo>).map(userInfo => new User(userInfo))
     }
     async restartCore() {
-        await this.sendMessage({type: 'core_restart'})
+        await this.sendMessage({ type: 'core_restart' })
     }
     async shutdownCore() {
-        await this.sendMessage({type: 'core_shutdown'})
+        await this.sendMessage({ type: 'core_shutdown' })
     }
 }
