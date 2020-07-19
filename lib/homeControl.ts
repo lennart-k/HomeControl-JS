@@ -5,6 +5,7 @@ import { Module } from './module.js'
 import { EventBus } from './event.js'
 import { uuidv4 } from './util.js'
 import Panel from './panel.js'
+import { Dashboard, DashboardInfo } from './dashboard.js'
 
 export interface WSCommand {
     type: string
@@ -21,6 +22,7 @@ export class HomeControl extends EventBus {
     items: Map<string, Item>
     modules: Map<string, Module>
     panels: Array<Panel>
+    dashboards: Map<string, Dashboard>
     ready: boolean = false
 
     constructor(apiUrl: string) {
@@ -29,6 +31,7 @@ export class HomeControl extends EventBus {
         this.items = new Map
         this.modules = new Map
         this.panels = new Array
+        this.dashboards = new Map
     }
 
     get wsUrl(): string {
@@ -51,7 +54,8 @@ export class HomeControl extends EventBus {
         await Promise.all([
             this.fetchItems(),
             this.fetchModules(),
-            this.fetchPanels()
+            this.fetchPanels(),
+            this.fetchDashboards()
         ])
 
         this.sendMessage({ type: 'watch_states' })
@@ -142,6 +146,13 @@ export class HomeControl extends EventBus {
         let response = await this.sendMessage({ type: 'get_panels' })
         for (let panelInfo of response.data) {
             this.panels.push(new Panel(panelInfo))
+        }
+    }
+    async fetchDashboards() {
+        let response = await this.sendMessage({ type: 'dashboard:get_dashboards' })
+        for (let dashboardInfo of Object.values(response.data.dashboards)) {
+            let dashboard = new Dashboard(dashboardInfo as DashboardInfo)
+            this.dashboards.set(dashboard.identifier, dashboard)
         }
     }
     async restartCore() {
