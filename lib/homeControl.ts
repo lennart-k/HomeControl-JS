@@ -1,5 +1,5 @@
 import { AccessToken } from './auth/index.js'
-import { User } from './auth/user.js'
+import { User, UserInfo } from './auth/user.js'
 import { Item } from './item.js'
 import { Module } from './module.js'
 import { EventBus } from './event.js'
@@ -112,7 +112,6 @@ export class HomeControl extends EventBus {
         })
         console.log(`Authenticated as ${this.user.name}`)
     }
-
     sendMessage(data: WSCommand): Promise<any> {
         let id = data.id = data.id || uuidv4()
 
@@ -154,6 +153,10 @@ export class HomeControl extends EventBus {
             let dashboard = new Dashboard(dashboardInfo as DashboardInfo)
             this.dashboards.set(dashboard.identifier, dashboard)
         }
+    }
+    async getUsers() {
+        let response = await this.sendMessage({ type: 'get_users' })
+        return (response.data as Array<UserInfo>).map(userInfo => new User(userInfo))
     }
     async restartCore() {
         await this.sendMessage({type: 'core_restart'})
