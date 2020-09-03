@@ -14,7 +14,6 @@ export interface WSCommand {
 }
 
 export class HomeControl extends EventBus {
-    connection!: WebSocket
     accessToken!: AccessToken
     apiUrl: string
     user!: User
@@ -89,8 +88,10 @@ export class HomeControl extends EventBus {
     }
     async onWSClose() {
         console.log('WebSocket closed')
+        if (this.ready) {
         this.ready = false
         this.fireEvent('disconnect')
+    }
     }
     async authenticate() {
         let authResponse = await this.sendMessage({
