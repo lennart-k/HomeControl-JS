@@ -15,8 +15,9 @@ export interface ItemInfo {
     name: string
     unique_identifier: string
     type: string
+    implements: Array<string>
     status: ItemStatus
-    states: {[key: string]: any}
+    states: { [key: string]: any }
 }
 
 export class Item extends EventBus {
@@ -25,6 +26,7 @@ export class Item extends EventBus {
     name?: string
     module: string
     type: string
+    implements: Array<string>
     states: Map<string, any>
     status: ItemStatus
     actions: Array<string>
@@ -38,6 +40,7 @@ export class Item extends EventBus {
         this.status = itemInfo.status
         this.module = itemInfo.module
         this.type = itemInfo.type
+        this.implements = itemInfo.implements
         this.actions = itemInfo.actions
         this.states = new Map
         this.core = core
@@ -45,7 +48,7 @@ export class Item extends EventBus {
             this.states.set(state, value)
         }
     }
-    async executeAction(action: string, data?: {[key: string]: any}) {
+    async executeAction(action: string, data?: { [key: string]: any }) {
         let result = await this.core.sendMessage({
             type: 'action',
             action: action,
@@ -55,9 +58,9 @@ export class Item extends EventBus {
         return result
     }
     async setState(state: string, value: any) {
-        return await this.setStates({[state]: value})
+        return await this.setStates({ [state]: value })
     }
-    async setStates(changes: {[key: string]: any}) {
+    async setStates(changes: { [key: string]: any }) {
         let result = await this.core.sendMessage({
             type: 'set_states',
             item: this.uniqueIdentifier,
@@ -65,7 +68,7 @@ export class Item extends EventBus {
         })
         return result
     }
-    updateStates(changes: {[key: string]: any}) {
+    updateStates(changes: { [key: string]: any }) {
         for (let [state, value] of Object.entries(changes)) {
             this.states.set(state, value)
         }
