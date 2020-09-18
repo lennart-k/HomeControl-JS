@@ -34,6 +34,6 @@ export class DashboardSection {
 
     constructor(sectionInfo: DashboardSectionInfo) {
         this.type = sectionInfo.type
-        this.configuration = sectionInfo.configuration
+        this.configuration = sectionInfo
     }
 }
