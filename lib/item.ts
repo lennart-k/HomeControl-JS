@@ -16,6 +16,7 @@ export interface ItemInfo {
     unique_identifier: string
     type: string
     implements: Array<string>
+    metadata: { [key: string]: any }
     status: ItemStatus
     states: { [key: string]: any }
 }
@@ -27,6 +28,7 @@ export class Item extends EventBus {
     module: string
     type: string
     implements: Array<string>
+    metadata: { [key: string]: any }
     states: Map<string, any>
     status: ItemStatus
     actions: Array<string>
@@ -41,6 +43,7 @@ export class Item extends EventBus {
         this.module = itemInfo.module
         this.type = itemInfo.type
         this.implements = itemInfo.implements
+        this.metadata = itemInfo.metadata
         this.actions = itemInfo.actions
         this.states = new Map
         this.core = core
